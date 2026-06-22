@@ -62,9 +62,3 @@ templating engines were designed to solve.
 pip install -r requirements.txt
 python generate_prompts.py
 ```
-
-## Optional extension
-
-`generate_prompts.py` includes a commented-out block showing how a generated prompt
-could be sent to an LLM API. Sending to a live model is **not required** for this
-assignment.
