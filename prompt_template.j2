@@ -1,0 +1,42 @@
+{# ============================================================
+   Customer-Support Intent Detection — prompt template
+   One template renders zero-shot / few-shot / JSON / clarify variants.
+   Variables:
+     - intents        : list of {name, description}
+     - message        : the customer message to classify
+     - examples       : optional list of {message, intent}  (few-shot)
+     - want_json      : bool  -> request structured JSON output
+     - allow_clarify  : bool  -> permit a clarifying follow-up question
+     - want_confidence: bool  -> ask for a confidence score
+   ============================================================ #}
+You are an expert customer-support assistant. Classify the customer's message
+into exactly one of the following intents.
+
+Candidate intents:
+{% for intent in intents %}
+  - {{ intent.name }}: {{ intent.description }}
+{% endfor %}
+{% if examples %}
+
+Here are some labeled examples:
+{% for ex in examples %}
+Message: "{{ ex.message }}"
+Intent: {{ ex.intent }}
+{% endfor %}
+{% endif %}
+{% if allow_clarify %}
+
+If the message is too ambiguous to classify confidently, respond instead with a
+single short clarifying question to the customer.
+{% endif %}
+
+Now classify this message:
+Message: "{{ message }}"
+{% if want_json %}
+
+Respond ONLY with a JSON object using this schema and no extra text:
+{"intent": "<one_of_the_intent_names>"{% if want_confidence %}, "confidence": <float 0-1>{% endif %}}
+{% else %}
+
+Respond with the single intent name{% if want_confidence %}, followed by a confidence score between 0 and 1{% endif %}.
+{% endif %}

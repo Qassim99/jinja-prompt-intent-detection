@@ -1,0 +1,20 @@
+{
+  "intents": [
+    {"name": "order_status",     "description": "Customer is asking where their order is or when it will arrive."},
+    {"name": "refund_request",   "description": "Customer wants money back for a product or service."},
+    {"name": "cancel_order",     "description": "Customer wants to cancel an order they placed."},
+    {"name": "technical_issue",  "description": "Customer reports a product/app/website not working."},
+    {"name": "billing_question", "description": "Customer has a question about a charge, invoice, or payment."},
+    {"name": "general_inquiry",  "description": "Anything that does not fit the categories above."}
+  ],
+  "few_shot_examples": [
+    {"message": "Where is my parcel? It was due two days ago.", "intent": "order_status"},
+    {"message": "I was charged twice for the same subscription.", "intent": "billing_question"},
+    {"message": "The mobile app keeps crashing when I open it.",  "intent": "technical_issue"}
+  ],
+  "messages_to_classify": [
+    "My package never arrived and I want my money back.",
+    "Can I stop the order I made an hour ago before it ships?",
+    "Hi, just wondering if you ship to Austria."
+  ]
+}
